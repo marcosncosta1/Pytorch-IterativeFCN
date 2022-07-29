@@ -175,7 +175,7 @@ def main():
                         help='folder of test images')
     parser.add_argument('--output_dir', type=str, default='./pred',
                         help='folder of pred masks')
-    parser.add_argument('--weights', type=str, default='./weights/IterativeFCN_best_train.pth',
+    parser.add_argument('--weights', type=str, default='./weights/IterativeFCN_pretrained.pth', # changed from IterativeFCN_best_train.pth
                         help='trained weights of model')
     parser.add_argument('--patch_size', type=int, default=128,
                         help='patch_size of the model')
