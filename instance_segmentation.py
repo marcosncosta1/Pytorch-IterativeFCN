@@ -19,6 +19,7 @@ def extract(img, x, y, z, patch_size):
 
 
 def instance_segmentation(model, img_name, patch_size, sigma_x, lim_alternate_times, n_min, output_path):
+    maxIters = 100 # debugging
     step = int(patch_size / 2)
     img = sitk.GetArrayFromImage(sitk.ReadImage(img_name))
     ins = np.zeros_like(img)
@@ -41,10 +42,12 @@ def instance_segmentation(model, img_name, patch_size, sigma_x, lim_alternate_ti
     # slide window check
     logging.info('Start Instance Segmentation')
     while True:
-
-        logging.info('(Z, Y, X) Now: (%s, %s, %s)' % (z, y, x))
+        logging.info('Iteration  (%s)' % (ii))
+        #logging.info('(Z, Y, X) Now: (%s, %s, %s)' % (z, y, x))
         if abs(x - patch_size / 2) < sigma_x and abs(y - patch_size / 2) < sigma_x and abs(
                 z - patch_size / 2) < sigma_x:
+            break
+        if ii == maxIters: # debugging
             break
 
         # extract patch and instance memory
